@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <title>API em Python da Roleta: JonBet</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+<body>
+    <h1 id="titulo" aria-label="Título da página: API em Python da Roleta">API em Python da Roleta: JonBet</h1>
+
+    <table id="results-table" aria-label="Tabela de resultados da roleta">
+        <thead>
+            <tr>
+                <th scope="col" aria-label="Número sorteado">Número</th>
+                <th scope="col" aria-label="Cor correspondente">Cor</th>
+            </tr>
+        </thead>
+        <tbody id="results-body">
+            {% for number, color in results %}
+                <tr>
+                    <td>{{ number }}</td>
+                    <td><div class="color-box {{ color|lower }}"></div></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div id="toast" class="toast">Novo número!</div>
+
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('novo_resultado', function(data) {
+            showToast('Novo número da roleta: ' + data.number + ' - Cor: ' + data.color);
+
+            var tbody = document.getElementById("results-body");
+
+            var newRow = document.createElement("tr");
+            newRow.classList.add("novo-resultado");
+
+            var numberCell = document.createElement("td");
+            numberCell.textContent = data.number;
+
+            var colorCell = document.createElement("td");
+            var colorBox = document.createElement("div");
+            colorBox.className = "color-box " + data.color.toLowerCase();
+            colorCell.appendChild(colorBox);
+
+            newRow.appendChild(numberCell);
+            newRow.appendChild(colorCell);
+
+            tbody.insertBefore(newRow, tbody.firstChild);
+
+            setTimeout(() => newRow.classList.remove("novo-resultado"), 1000);
+        });
+
+        function showToast(message) {
+            var toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.className = "toast show";
+            setTimeout(function () {
+                toast.className = toast.className.replace("show", "");
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+
+
+
