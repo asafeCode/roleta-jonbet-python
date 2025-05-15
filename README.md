@@ -46,17 +46,23 @@ Este projeto é uma aplicação web em Python que consome a API da roleta do sit
     pip install -r requirements.txt
     ```
 
-4. Execute a aplicação:
+4. Selecione o Interpretador Python Correto:
     ```bash
     python api.py
     ```
 
-5. Acesse no navegador:
+5. Execute a aplicação:
+    ```bash
+    > Python: Select Interpreter -> Enter Interpreter Path
+    -> Find... -> venv\bin\Python3.12
+    ```
+
+6. Acesse no navegador:
     ```
     Use o Google Chrome
     http://localhost:5000
     ```
-6. Finalizar a Aplicação:
+7. Finalizar a Aplicação:
     ```
     Para parar o servidor, vá ao terminal onde está rodando e pressione Ctrl + C
     ```
