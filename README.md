@@ -48,13 +48,14 @@ Este projeto é uma aplicação web em Python que consome a API da roleta do sit
 
 4. Selecione o Interpretador Python Correto:
     ```bash
-    python api.py
+    > Python: Select Interpreter -> Enter Interpreter Path
+    -> Find... -> venv\bin\Python3.12
     ```
+   
 
 5. Execute a aplicação:
     ```bash
-    > Python: Select Interpreter -> Enter Interpreter Path
-    -> Find... -> venv\bin\Python3.12
+    python api.py
     ```
 
 6. Acesse no navegador:
